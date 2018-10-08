@@ -42,6 +42,7 @@ public class NetworkManager extends CordovaPlugin {
     public static int NOT_REACHABLE = 0;
     public static int REACHABLE_VIA_CARRIER_DATA_NETWORK = 1;
     public static int REACHABLE_VIA_WIFI_NETWORK = 2;
+    public static int CONNECTION_TIMEOUT_CHECK = 1000;
 
     public static final String WIFI = "wifi";
     public static final String WIMAX = "wimax";
@@ -154,15 +155,29 @@ public class NetworkManager extends CordovaPlugin {
     //--------------------------------------------------------------------------
 
     private void registerConnectivityActionReceiver() {
+
         // We need to listen to connectivity events to update navigator.connection
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        intentFilterIdle.addAction(PowerManager.ACTION_DEVICE_IDLE_MODE_CHANGED);
         if (this.receiver == null) {
             this.receiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
                     // (The null check is for the ARM Emulator, please use Intel Emulator for better results)
+                    PowerManager pm = (PowerManager)context.getSystemService(Context.POWER_SERVICE);
                     if (NetworkManager.this.webView != null) {
+                        if (!pm.isDeviceIdleMode()) {
+                        NetworkInfo info = sockMan.getActiveNetworkInfo();
+                        if (info != null) {
+                            if (info.isAvailable()) {
+                                long startTime = System.currentTimeMillis(); //fetch starting time
+                                while(!info.isConnected()&&(System.currentTimeMillis()-startTime)<CONNECTION_TIMEOUT_CHECK)
+                                {
+                                    info = sockMan.getActiveNetworkInfo();
+                                }
+                            }
+                        }
                         updateConnectionInfo(sockMan.getActiveNetworkInfo());
                     }
 
