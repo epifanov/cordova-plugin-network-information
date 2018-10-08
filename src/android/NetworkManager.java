@@ -144,7 +144,8 @@ public class NetworkManager extends CordovaPlugin {
     @Override
     public void onResume(boolean multitasking) {
         super.onResume(multitasking);
-         this.unregisterReceiver();
+
+        this.unregisterReceiver();
         this.registerConnectivityActionReceiver();
     }
 
@@ -164,7 +165,8 @@ public class NetworkManager extends CordovaPlugin {
                     if (NetworkManager.this.webView != null) {
                         updateConnectionInfo(sockMan.getActiveNetworkInfo());
                     }
-                     String connectionType = null;
+
+                    String connectionType = null;
                     if(NetworkManager.this.lastInfo == null) {
                         connectionType = TYPE_NONE;
                     } else {
@@ -175,7 +177,8 @@ public class NetworkManager extends CordovaPlugin {
                             connectionType = TYPE_NONE;
                         }
                     }
-                     if(TYPE_NONE.equals(connectionType)) {
+
+                    if(TYPE_NONE.equals(connectionType)) {
                         boolean noConnectivity = intent.getBooleanExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY, false);
                         LOG.d(LOG_TAG, "Intent no connectivity: " + noConnectivity);
                         if(noConnectivity) {
@@ -188,7 +191,8 @@ public class NetworkManager extends CordovaPlugin {
                 }
             };
         }
-         webView.getContext().registerReceiver(this.receiver, intentFilter);
+
+        webView.getContext().registerReceiver(this.receiver, intentFilter);
     }
 
     private void unregisterReceiver() {
