@@ -49,10 +49,10 @@
 #import <netinet/in.h>
 
 typedef enum {
-    NotReachable = 0,
-    ReachableViaWWAN, // this value has been swapped with ReachableViaWiFi for Cordova backwards compat. reasons
-    ReachableViaWiFi  // this value has been swapped with ReachableViaWWAN for Cordova backwards compat. reasons
-} NetworkStatus;
+    NetworkNotReachable = 0,
+    NetworkReachableViaWWAN, // this value has been swapped with ReachableViaWiFi for Cordova backwards compat. reasons
+    NetworkReachableViaWiFi  // this value has been swapped with ReachableViaWWAN for Cordova backwards compat. reasons
+} NetworkStatusEnum;
 #define kReachabilityChangedNotification @"kNetworkReachabilityChangedNotification"
 
 @interface CDVReachability : NSObject
@@ -74,7 +74,7 @@ typedef enum {
 - (BOOL)startNotifier;
 - (void)stopNotifier;
 
-- (NetworkStatus)currentReachabilityStatus;
+- (NetworkStatusEnum)currentReachabilityStatus;
 // WWAN may be available, but not active until a connection has been established.
 // WiFi may require a connection for VPN on Demand.
 - (BOOL)connectionRequired;
