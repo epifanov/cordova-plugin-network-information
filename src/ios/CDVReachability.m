@@ -191,7 +191,7 @@ static void CDVReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRe
     if ((flags & kSCNetworkReachabilityFlagsConnectionRequired) == 0) {
         // if target host is reachable and no connection is required
         //  then we'll assume (for now) that your on Wi-Fi
-        retVal = NetworkReachableViaWWAN;
+        retVal = NetworkReachableViaWiFi;
     }
 
     if ((((flags & kSCNetworkReachabilityFlagsConnectionOnDemand) != 0) ||
@@ -201,7 +201,7 @@ static void CDVReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRe
 
         if ((flags & kSCNetworkReachabilityFlagsInterventionRequired) == 0) {
             // ... and no [user] intervention is needed
-            retVal = NetworkReachableViaWWAN;
+            retVal = NetworkReachableViaWiFi;
         }
     }
 

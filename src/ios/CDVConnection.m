@@ -87,7 +87,7 @@
                 return @"cellular";
             }
         }
-        case NetworkReachableViaWWAN:
+        case NetworkReachableViaWiFi:
         {
             BOOL isConnectionRequired = [reachability connectionRequired];
             if (isConnectionRequired) {
