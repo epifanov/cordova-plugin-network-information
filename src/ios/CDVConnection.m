@@ -150,7 +150,7 @@
     self.connectionType = [self w3cConnectionTypeFor:self.internetReach];
     [self.internetReach startNotifier];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateConnectionType:)
-                                                 name:kReachabilityChangedNotification object:nil];
+                                                 name:kkReachabilityChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateConnectionType:)
                                                  name:CTRadioAccessTechnologyDidChangeNotification object:nil];
     if (UIApplicationDidEnterBackgroundNotification && UIApplicationWillEnterForegroundNotification) {

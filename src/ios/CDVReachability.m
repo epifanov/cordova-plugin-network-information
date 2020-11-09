@@ -100,7 +100,7 @@ static void CDVReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRe
     @autoreleasepool {
         CDVReachability* noteObject = (__bridge CDVReachability*)info;
         // Post a notification to notify the client that the network reachability changed.
-        [[NSNotificationCenter defaultCenter] postNotificationName:kReachabilityChangedNotification object:noteObject];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kkReachabilityChangedNotification object:noteObject];
     }
 }
 
