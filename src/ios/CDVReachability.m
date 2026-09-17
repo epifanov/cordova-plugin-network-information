@@ -46,7 +46,9 @@
 
 #import <sys/socket.h>
 #import <netinet/in.h>
-#import <netinet6/in6.h>
+// Do not import <netinet6/in6.h>: it is a private header in the iOS 26 SDK
+// ("Use of private header from outside its module"); <netinet/in.h> already
+// includes it transitively.
 #import <arpa/inet.h>
 #import <ifaddrs.h>
 #import <netdb.h>
